@@ -1,16 +1,21 @@
 /** @format */
 
-const sgMail = require('@sendgrid/mail');
+const nodemailer = require('nodemailer');
 require('dotenv').config();
 
-const { SENDGRID_API_KEY } = process.env;
-const sentFrom = '';
+const { SENDMAILER_LOGIN, SENDMAILER_PASSWORD } = process.env;
 
-sgMail.setApiKey(SENDGRID_API_KEY);
+const transporter = nodemailer.createTransport({
+	service: 'gmail',
+	auth: {
+		user: SENDMAILER_LOGIN,
+		pass: SENDMAILER_PASSWORD,
+	},
+});
 
 const sendMailer = async confirmEmail => {
-	const email = { ...confirmEmail, from: sentFrom };
-	await sgMail.send(email);
+	const email = { ...confirmEmail, from: SENDMAILER_LOGIN };
+	await transporter.sendMail(email);
 };
 
 module.exports = sendMailer;

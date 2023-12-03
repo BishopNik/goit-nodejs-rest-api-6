@@ -7,7 +7,7 @@ const confirmVerify = async ({ params }, res) => {
 	const { verificationToken } = params;
 	const user = await User.findOne({ verificationToken });
 
-	if (user) {
+	if (!user) {
 		throw HttpError(404, 'User not found');
 	}
 
