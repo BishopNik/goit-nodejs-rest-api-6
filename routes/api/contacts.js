@@ -2,7 +2,7 @@
 
 const express = require('express');
 
-const { validateBody, isValidId, authenticate } = require('../../middlewares');
+const { validateBody, isValidId, authenticate, checkOwner } = require('../../middlewares');
 const { contactAddSchema } = require('../../models');
 const {
 	listContacts,
@@ -17,7 +17,7 @@ const router = express.Router();
 
 router.get('/', authenticate, ctrlWrapper(listContacts));
 
-router.get('/:contactId', authenticate, isValidId, ctrlWrapper(getContactById));
+router.get('/:contactId', authenticate, isValidId, checkOwner, ctrlWrapper(getContactById));
 
 router.post('/', authenticate, validateBody(contactAddSchema), ctrlWrapper(addContact));
 

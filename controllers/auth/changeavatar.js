@@ -47,6 +47,11 @@ const bucket = storage.bucket();
 
 const changeAvatar = async ({ user, file }, res) => {
 	const { _id } = user;
+
+	if (!file) {
+		throw HttpError(406, 'Error loading avatar');
+	}
+
 	const { path: tempUpload, originalname } = file;
 	const filename = `${_id}_${originalname}`;
 
