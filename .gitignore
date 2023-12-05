@@ -128,3 +128,4 @@ dist
 
 # other
 *.json
+.DS_Store
