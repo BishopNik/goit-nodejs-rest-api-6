@@ -21,7 +21,7 @@ authRouter.post('/register', isEmptyBody, validateBody(registerSchema), ctrlWrap
 
 authRouter.post('/login', isEmptyBody, validateBody(loginSchema), ctrlWrapper(login));
 
-authRouter.post('/logout', isEmptyBody, authenticate, ctrlWrapper(logout));
+authRouter.post('/logout', authenticate, ctrlWrapper(logout));
 
 authRouter.get('/current', authenticate, ctrlWrapper(getCurrent));
 
