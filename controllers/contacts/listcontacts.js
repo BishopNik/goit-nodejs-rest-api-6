@@ -11,11 +11,11 @@ const listContacts = async ({ user, query }, res) => {
 		favorite === undefined
 			? await Contact.find({ owner: idUser }, '-createdAt -updatedAt', {
 					skip,
-					perPage,
+					limit: perPage,
 			  }).populate('owner', 'name email')
 			: await Contact.find({ owner: idUser, favorite }, '-createdAt -updatedAt', {
 					skip,
-					perPage,
+					limit: perPage,
 			  }).populate('owner', 'name email');
 
 	res.json(data);
